@@ -1,109 +1,48 @@
 import SwiftUI
 
-struct hot: View {
+struct profile: View {
     var body: some View {
         GeometryReader { geometry in
-            ZStack(alignment: .bottom) {
+            ZStack(alignment: .top) {
+                Header(pageName: "My Netflix", r1: "share", r2: "search", r3: "menu")
+                    .zIndex(1)
+                    .background(Color.black)
+                
                 // Main content
                 ScrollView {
                     VStack(spacing: 16) {
-                        // Header
-                        HStack {
-                            Text("New & Hot")
-                                .font(.system(size: 24, weight: .semibold))
-                                .foregroundStyle(.white)
-                            
-                            Spacer()
-                            
-                            HStack(alignment: .center, spacing: 22) {
-                                Image("share")
-                                  .frame(width: 21, height: 17)
+                        VStack(alignment: .center, spacing: 2) {
+                            ZStack {
                                 
-                                Image("download")
-                                  .frame(width: 23, height: 19)
-                                
-                                Image("search")
-                                  .frame(width: 22, height: 22)
                             }
-                        }
-                        .padding(.top, 68)
-                        
-                        // Category filters
-                        ScrollView (.horizontal, showsIndicators: false) {
-                            HStack(alignment: .center, spacing: 8) {
-                                HStack(alignment: .center, spacing: 10) {
-                                    Text("🍿 Coming Soon")
-                                        .font(.system(size: 14, weight: .bold))
-                                        .foregroundColor(Color(red: 0.83, green: 0.82, blue: 0.82))
-                                }
-                                .padding(.leading, 16)
-                                .padding(.trailing, 15)
-                                .padding(.vertical, 8)
-                                .frame(height: 34, alignment: .center)
-                                .cornerRadius(40)
-                                .background(Color(red: 0.36, green: 0.33, blue: 0.32))
-
-                                .cornerRadius(40)
-                                .overlay(
-                                RoundedRectangle(cornerRadius: 40)
-                                .inset(by: 0.5)
-                                .stroke(Color(red: 0.36, green: 0.33, blue: 0.32), lineWidth: 1)
-
-                                )
-                                
-                                HStack(alignment: .center, spacing: 10) {
-                                    Text("🔥 Everyone's Watching")
-                                        .font(.system(size: 14, weight: .semibold))
-                                        .foregroundColor(Color(red: 0.83, green: 0.82, blue: 0.82))
-                                }
-                                .padding(.leading, 16)
-                                .padding(.trailing, 15)
-                                .padding(.vertical, 8)
-                                .frame(height: 34, alignment: .center)
-                                .cornerRadius(40)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 40)
-                                        .inset(by: 0.5)
-                                        .stroke(Color(red: 0.47, green: 0.39, blue: 0.38), lineWidth: 1)
-                                )
-                                
-                                HStack(alignment: .center, spacing: 10) {
-                                    Text("Categories")
-                                        .font(.system(size: 14, weight: .semibold))
-                                        .foregroundColor(Color(red: 0.83, green: 0.82, blue: 0.82))
-                                }
-                                .padding(.leading, 16)
-                                .padding(.trailing, 15)
-                                .padding(.vertical, 8)
-                                .frame(height: 34, alignment: .center)
-                                .cornerRadius(40)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 40)
-                                        .inset(by: 0.5)
-                                        .stroke(Color(red: 0.47, green: 0.39, blue: 0.38), lineWidth: 1)
-                                )
-                            }
+                            .frame(width: 70, height: 70)
+                            .background(.white)
+                            .cornerRadius(6)
                             
-                            Spacer()
+                            HStack(alignment: .center, spacing: 7) {
+                                Text("Rocky")
+                                    .font(.system(size: 24, weight: .semibold))
+                                  .foregroundColor(.white)
+                                
+                                Image("down")
+                                .frame(width: 10.5, height: 5.5)
+                            }
+                            .padding(0)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         }
-                        .padding(.bottom, 12)
-                        
-                        // Featured content
-                    
-                        NewCard()
-                        
-                        NewCard()
-                        
-                        NewCard()
-                        
-                        // Mobile Games section
+                        .padding(0)
+                        .frame(width: 89.5, alignment: .top)
                         
                         
-                        // Add extra spacing at the bottom to account for the nav bar
+                        NotificaitonSection(SectionName: "Notifications", SectionColor: .red)
+                        
+                        DownloadsSection(SectionName: "Downloads", SectionColor: .purple)
+                        
+                        ProfileCardSection(title: "My section")
+                        
                         Spacer()
-                            .frame(height: 90)
                     }
-                    
+                    .padding(.top, 120)
                     .padding(.vertical, 16)
                     .padding(.horizontal, 16)
                 }
@@ -121,25 +60,142 @@ struct hot: View {
 }
 
 
-struct NewCard: View {
+struct NotificationCard: View {
+    
+    var Title : String = ""
+    var Subtext : String = ""
+    var Date : String = ""
+    
     var body: some View {
-        HStack(alignment: .top, spacing: 10) {
-            ZStack {
+        HStack(alignment: .center, spacing: 8) {
+            ZStack { }
+                .frame(width: 8, height: 8)
+                .background(Color(red: 1, green: 0, blue: 0))
+                .cornerRadius(30)
+            
+            ZStack { }
+                .frame(width: 124, height: 70)
+                .background(Color(red: 0.22, green: 0.09, blue: 0))
+                .cornerRadius(4)
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(Title)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(Color(red: 0.7, green: 0.7, blue: 0.7))
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
                 
+                Text(Subtext)
+                    .font(.system(size: 14, weight: .regular))
+                    .kerning(0.48)
+                    .foregroundColor(Color(red: 0.7, green: 0.7, blue: 0.7))
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                
+                Text(Date)
+                    .font(.system(size: 14, weight: .regular))
+                    .foregroundColor(Color(red: 0.7, green: 0.7, blue: 0.7))
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
             }
-            .frame(maxWidth: .infinity, minHeight: 211, maxHeight: 211)
-            .background(Color(red: 0.1, green: 0.1, blue: 0.1))
+            .padding(0)
+            .frame(maxWidth: .infinity, alignment: .topLeading)
         }
         .padding(0)
-        .frame(width: 361, height: 332, alignment: .top)
-        .cornerRadius(12)
-        .overlay(
-          RoundedRectangle(cornerRadius: 12)
-            .inset(by: 0.25)
-            .stroke(Color(red: 0.47, green: 0.39, blue: 0.38).opacity(0.67), lineWidth: 0.5)
-        )
+        .frame(width: 370, alignment: .leading)
     }
 }
 
+struct NotificaitonSection: View {
+    
+    var SectionName: String = ""
+    var SectionColor: Color = Color.red
+    
+    var body: some View {
+        VStack (spacing: 20) {
+            HStack(alignment: .center)
+            {
+                HStack(alignment: .center, spacing: 8) {
+                    ZStack {  }
+                        .frame(width: 44, height: 44)
+                        .background(SectionColor)
+                        .cornerRadius(50)
+                    
+                    Text(SectionName)
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(.white)
+                }
+                .padding(0)
+                
+                Spacer()
+                Image("right")
+                    .frame(width: 12, height: 22)
+            }
+            .padding(0)
+            
+            NotificationCard(Title: "Coming Soon", Subtext: "Play the trailer", Date: "Tomorrow")
+            
+            NotificationCard(Title: "Coming Soon", Subtext: "Play the trailer", Date: "Tomorrow")
+        }
+        .frame(width: 377, alignment: .center)
+        .padding(.top, 24)
+    }
+}
 
+struct DownloadsSection: View {
+    
+    var SectionName: String = ""
+    var SectionColor: Color = Color.red
+    
+    var body: some View {
+        VStack (spacing: 20) {
+            HStack(alignment: .center)
+            {
+                HStack(alignment: .center, spacing: 8) {
+                    ZStack {  }
+                        .frame(width: 44, height: 44)
+                        .background(SectionColor)
+                        .cornerRadius(50)
+                    
+                    Text(SectionName)
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(.white)
+                }
+                .padding(0)
+                
+                Spacer()
+                Image("right")
+                    .frame(width: 12, height: 22)
+            }
+            .padding(0)
+        }
+        .frame(width: 377, alignment: .center)
+        .padding(.top, 24)
+    }
+}
 
+struct ProfileCardSection: View {
+    var title: String
+    var body: some View {
+        VStack(spacing: 0) {
+            HStack(alignment: .center) {
+                Text(title)
+                    .font(.system(size: 17, weight: .semibold))
+                    .kerning(0.34)
+                    .foregroundColor(.white)
+                
+                Spacer()
+            }
+            .padding(.horizontal, 8)
+            
+            ScrollView(.horizontal) {
+                HStack(spacing: 10) {
+                    ForEach(0..<5) { _ in
+                        MediumCard(imageName: "witcher")
+                    }
+                }
+                .padding(.vertical, 10)
+                .padding(.leading, 8)
+                .padding(.trailing, 8)
+            }
+            .scrollIndicators(.hidden)
+        }
+    }
+}
